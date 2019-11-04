@@ -1,0 +1,63 @@
+## -*- coding: utf-8 -*-
+#"""
+#Spyder Editor
+#
+#This is a temporary script file.
+#"""
+#
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+
+#df = pd.read_csv("C:/Users/laxman.baral/OneDrive - CALUMO Labs Pty Ltd/Desktop/Power BI/codebasics/ML/1_linear_reg/homeprices.csv")
+##print(df.head())
+#
+#
+##
+##plt.xlabel('area')
+##plt.ylabel('price(us$)')
+##plt.scatter(df.area,df.price,color='red',marker='+')
+#
+#
+#reg = linear_model.LinearRegression()
+#reg.fit(df[['area']],df.price)
+##print(reg.predict([[3300]]))
+#
+#plt.xlabel('area',fontsize=20)
+#plt.ylabel('price(us$)',fontsize=20)
+#plt.scatter(df.area,df.price,color='red',marker='+')
+#plt.plot(df.area,reg.predict(df[['area']]),color='blue')
+#
+##reg.coef_
+##reg.intercept_
+##d = pd.read_csv("C:/Users/laxman.baral/OneDrive - CALUMO Labs Pty Ltd/Desktop/Power BI/codebasics/ML/1_linear_reg/areas.csv")
+##d.head(3)
+##
+##p = reg.predict(d)
+##
+##d['prices'] = p
+##
+###print(d)
+
+dfc = pd.read_csv("C:/Users/laxman.baral/OneDrive - CALUMO Labs Pty Ltd/Desktop/Power BI/codebasics/ML/1_linear_reg/canada_per_capita_income.csv")
+dfc.columns = dfc.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '').str.replace('$', '')
+#print(dfc.head())
+
+#plt.xlabel('year')
+#plt.ylabel('PCI')
+#plt.scatter(dfc.year,dfc.per_capita_income_us,color ='red')
+
+lreg = linear_model.LinearRegression()
+
+lreg.fit(dfc[['year']],dfc.per_capita_income_us)
+pred = lreg.predict(dfc[['year']])
+
+dfc['predictions'] = pred
+
+print(dfc.head())
+
+#
+plt.xlabel('year')
+plt.ylabel('PCI')
+plt.scatter(dfc.year,dfc.per_capita_income_us,color ='red')
+plt.plot(dfc.year,lreg.predict(dfc[['year']]), color='blue')
